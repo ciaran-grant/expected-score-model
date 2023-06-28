@@ -45,7 +45,7 @@ class ModellingDataContract:
         # 'Event_Type1',
         # 'Event_Type2',
         # 'Event_Type3',
-        # 'x0',
+        'x0',
         # 'x1',
         # 'x2',
         # 'x3',
@@ -65,17 +65,23 @@ class ModellingDataContract:
         'Distance_to_Middle_Goal',
         'Angle_to_Middle_Goal',
         # 'Angle_to_Middle_Goal_degrees',
-        # 'Visible_Goal_Angle',
+        'Visible_Goal_Angle',
         # 'Visible_Goal_Angle_degrees',
         # 'Visible_Behind_Angle',
         # 'Visible_Behind_Angle_degrees',
         # 'Squared_Distance_to_Middle_Goal',
         # 'Log_Distance_to_Middle_Goal'
+        
+        'ballUp', 'centreBounce', 'kickIn', 'possGain', 'throwIn'
     ]
     
     monotone_constraints_goal = {
         'Distance_to_Middle_Goal':-1,
-        'Angle_to_Middle_Goal':-1
+        'Angle_to_Middle_Goal':-1,
+        'Visible_Goal_Angle':1,
+        'x0':-1,
+        # 'Squared_Distance_to_Middle_Goal':-1,
+        # 'Log_Distance_to_Middle_Goal':-1
     }
     monotone_constraints_behind = {
         'Distance_to_Middle_Goal':1,
