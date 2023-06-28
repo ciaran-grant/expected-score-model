@@ -21,9 +21,10 @@ class HyperparameterTuner:
              
 class XGBHyperparameterTuner(HyperparameterTuner, OptunaXGBParamGrid):
     
-    def __init__(self, training_data, response, monotonicity_constraints = None) -> None:
+    def __init__(self, training_data, response, monotonicity_constraints = None, num_class = None) -> None:
         super().__init__(training_data, response)
         self.monotonicity_constraints = monotonicity_constraints
+        self.num_class = num_class
 
     def objective(self, trial):
 
@@ -73,6 +74,7 @@ class XGBHyperparameterTuner(HyperparameterTuner, OptunaXGBParamGrid):
                                                     self.colsample_bytree_max),
         }        
         param['monotone_constraints'] = self.monotonicity_constraints
+        param['num_class'] = self.num_class
 
         bst = xgb.train(param, dtrain)
         preds = bst.predict(dvalid)
@@ -80,6 +82,8 @@ class XGBHyperparameterTuner(HyperparameterTuner, OptunaXGBParamGrid):
         if self.error == "reg:squarederror":
             return mean_squared_error(preds, valid_y, squared=False)
         if self.error == "binary:logistic":
+            return log_loss(valid_y, preds)
+        if self.error == "multi:softprob":
             return log_loss(valid_y, preds)
 
         
