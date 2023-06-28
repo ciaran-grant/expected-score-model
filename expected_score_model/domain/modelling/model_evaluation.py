@@ -233,9 +233,9 @@ class XGBModelEvaluator(ModelEvaluator):
 
         return list(feature_importance['col_name'])
         
-    def plot_pdp(self, feature_list):
+    def plot_pdp(self, feature_list, target=None):
         """Plot partial dependence plot for a given feature"""
-        PartialDependenceDisplay.from_estimator(self.model, self.data[self.feature_names], feature_list)
+        PartialDependenceDisplay.from_estimator(self.model, self.data[self.feature_names], feature_list, target=target)
         
     def plot_ice(self, feature_list):
         """Plot individual conditional expectation (ICE) plot for a given feature"""

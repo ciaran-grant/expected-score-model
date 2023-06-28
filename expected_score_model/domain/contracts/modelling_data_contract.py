@@ -9,6 +9,7 @@ class ModellingDataContract:
     RESPONSE_GOAL = "Goal"
     RESPONSE_BEHIND = "Behind"
     RESPONSE_MISS = "Miss"
+    RESPONSE_MULTICLASS = "Kick_Outcome"
     TRAIN_TEST_SPLIT_COL = "ModellingFilter"
         
     team_list = [
