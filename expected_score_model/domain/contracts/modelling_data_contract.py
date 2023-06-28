@@ -71,7 +71,11 @@ class ModellingDataContract:
         # 'Log_Distance_to_Middle_Goal'
     ]
     
-    monotone_constraints = {
+    monotone_constraints_goal = {
+        'Distance_to_Middle_Goal':-1,
+        'Angle_to_Middle_Goal':-1
+    }
+    monotone_constraints_behind = {
         'Distance_to_Middle_Goal':1,
         'Angle_to_Middle_Goal':1
     }
