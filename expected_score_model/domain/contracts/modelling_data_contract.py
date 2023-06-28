@@ -32,56 +32,38 @@ class ModellingDataContract:
         'West Coast',
         'Western Bulldogs'
     ]
-    
-    modelling_feature_list = [
-        # 'Initial_State',
-        # 'Quarter',
-        # 'Quarter_Duration',
-        # 'Team',
-        # 'x',
-        # 'y',
-        # 'Current_Margin',
-        # 'Event_Type0',
-        # 'Event_Type1',
-        # 'Event_Type2',
-        # 'Event_Type3',
+    set_goal_modelling_feature_list = [
         'x0',
-        # 'x1',
-        # 'x2',
-        # 'x3',
-        # 'y0',
-        # 'y1',
-        # 'y2',
-        # 'y3',
-        # 'Quarter_Duration0',
-        # 'Quarter_Duration1',
-        # 'Quarter_Duration2',
-        # 'Quarter_Duration3',
-        # 'Chain_Duration',
-        # 'Time_Since_Last_Action',
-        # 'Distance_Since_Last_Action',
-        # 'Distance_to_Right_Goal_x',
-        # 'Distance_to_Middle_y',
         'Distance_to_Middle_Goal',
         'Angle_to_Middle_Goal',
-        # 'Angle_to_Middle_Goal_degrees',
         'Visible_Goal_Angle',
-        # 'Visible_Goal_Angle_degrees',
-        # 'Visible_Behind_Angle',
-        # 'Visible_Behind_Angle_degrees',
-        # 'Squared_Distance_to_Middle_Goal',
-        # 'Log_Distance_to_Middle_Goal'
-        
-        'ballUp', 'centreBounce', 'kickIn', 'possGain', 'throwIn'
+        'ballUp', 
+        'centreBounce', 
+        'kickIn', 
+        'possGain', 
+        'throwIn'
     ]
-    
-    monotone_constraints_goal = {
+    open_goal_modelling_feature_list = [
+        'x0',
+        'Distance_Since_Last_Action',
+        'Distance_to_Middle_Goal',
+        'Angle_to_Middle_Goal',
+        'Visible_Goal_Angle',
+        'possGain', 
+    ]
+
+    monotone_constraints_set_goal = {
         'Distance_to_Middle_Goal':-1,
         'Angle_to_Middle_Goal':-1,
         'Visible_Goal_Angle':1,
         'x0':-1,
-        # 'Squared_Distance_to_Middle_Goal':-1,
-        # 'Log_Distance_to_Middle_Goal':-1
+    }
+    monotone_constraints_open_goal = {
+        'Distance_to_Middle_Goal':-1,
+        'Angle_to_Middle_Goal':-1,
+        'Visible_Goal_Angle':1,
+        'x0':-1,
+        'Distance_Since_Last_Action':1
     }
     monotone_constraints_behind = {
         'Distance_to_Middle_Goal':1,
