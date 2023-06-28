@@ -255,8 +255,12 @@ class XGBClassifierEvaluator(XGBModelEvaluator):
             self.compare_label = self.data[compare_label_name]       
     
     def get_log_loss(self):
-        """Return the confusion matrix for binary classification"""
-        return log_loss(self.actual, self.expected)    
+        """Return the logloss for binary classification"""
+        print("Expected Log-Loss: \t{:.4f}".format(log_loss(self.actual, self.expected)))
+        if self.compare_name is not None:
+            print("Compare Log-Loss: \t{:.4f}".format(log_loss(self.actual, self.compare)))
+            return log_loss(self.actual, self.expected), log_loss(self.actual, self.expected)
+        return log_loss(self.actual, self.expected)
 
     def get_confusion_matrix(self):
         """Return the confusion matrix for binary classification"""
@@ -269,7 +273,11 @@ class XGBClassifierEvaluator(XGBModelEvaluator):
     
     def get_auc_score(self):
         """Return the AUC score for binary classification"""
-        return roc_auc_score(self.actual, self.expected_label)
+        if self.compare_name is not None:
+            return roc_auc_score(self.actual, self.expected_label), roc_auc_score(self.actual, self.compare_label)
+        else:
+            return roc_auc_score(self.actual, self.expected_label)
+        
     
     def display_confusion_matrix(self):
         """ Display confusion matrix"""
@@ -285,6 +293,10 @@ class XGBClassifierEvaluator(XGBModelEvaluator):
            
     def get_brier_score_loss(self):
         """Return the brier loss score"""
+        print("Expected Brier Score: \t{:.4f}".format(brier_score_loss(self.actual, self.expected)))
+        if self.compare_name is not None:
+            print("Compare Brier Score: \t{:.4f}".format(brier_score_loss(self.actual, self.compare)))
+            return brier_score_loss(self.actual, self.expected), brier_score_loss(self.actual, self.compare)
         return brier_score_loss(self.actual, self.expected)
     
     def get_accuracy(self):

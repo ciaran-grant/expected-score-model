@@ -21,7 +21,7 @@ class HyperparameterTuner:
              
 class XGBHyperparameterTuner(HyperparameterTuner, OptunaXGBParamGrid):
     
-    def __init__(self, training_data, response, monotonicity_constraints) -> None:
+    def __init__(self, training_data, response, monotonicity_constraints = None) -> None:
         super().__init__(training_data, response)
         self.monotonicity_constraints = monotonicity_constraints
 
