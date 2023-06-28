@@ -8,6 +8,7 @@ class ModellingDataContract:
     ID_COL = "Match_ID"
     RESPONSE_GOAL = "Goal"
     RESPONSE_BEHIND = "Behind"
+    RESPONSE_MISS = "Miss"
     TRAIN_TEST_SPLIT_COL = "ModellingFilter"
         
     team_list = [
@@ -76,6 +77,10 @@ class ModellingDataContract:
         'Angle_to_Middle_Goal':-1
     }
     monotone_constraints_behind = {
+        'Distance_to_Middle_Goal':1,
+        'Angle_to_Middle_Goal':1
+    }
+    monotone_constraints_miss = {
         'Distance_to_Middle_Goal':1,
         'Angle_to_Middle_Goal':1
     }
