@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 @dataclass
 class OptunaXGBParamGrid:
-    trials: int = 100
+    trials: int = 1000
     verbosity: int = 0
     error: str = "binary:logistic"
     num_rounds: int = 1000
