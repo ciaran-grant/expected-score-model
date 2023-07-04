@@ -45,11 +45,22 @@ class ModellingDataContract:
     ]
     open_goal_modelling_feature_list = [
         'x0',
+        'x1',
+        'x2',
+        'x3',
         'Distance_Since_Last_Action',
         'Distance_to_Middle_Goal',
         'Angle_to_Middle_Goal',
         'Visible_Goal_Angle',
-        'possGain', 
+        'ballUp',
+        'centreBounce',
+        'kickIn',
+        'possGain',
+        'throwIn',
+        'Distance_to_Right_Goal_x',
+        'Distance_to_Middle_y',
+        'Chain_Duration',
+        'Time_Since_Last_Action'
     ]
 
     monotone_constraints_set_goal = {
@@ -59,17 +70,9 @@ class ModellingDataContract:
         'x0':-1,
     }
     monotone_constraints_open_goal = {
-        'Distance_to_Middle_Goal':-1,
-        'Angle_to_Middle_Goal':-1,
-        'Visible_Goal_Angle':1,
-        'x0':-1,
-        'Distance_Since_Last_Action':1
-    }
-    monotone_constraints_behind = {
-        'Distance_to_Middle_Goal':1,
-        'Angle_to_Middle_Goal':1
-    }
-    monotone_constraints_miss = {
-        'Distance_to_Middle_Goal':1,
-        'Angle_to_Middle_Goal':1
+        'Angle_to_Middle_Goal': -1,
+        'Distance_Since_Last_Action': 1,
+        'Distance_to_Middle_Goal': -1,
+        'Visible_Goal_Angle': 1, 
+        'x0': -1
     }
