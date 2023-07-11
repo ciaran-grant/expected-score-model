@@ -2,10 +2,11 @@ from expected_score_model.domain.contracts.modelling_data_contract import Modell
 
 import xgboost as xgb
 import joblib
+from betacal import BetaCalibration
 
 class SuperModel:
     
-    def __init__(self, X_train, y_train, X_test, y_test, params):
+    def __init__(self, X_train, y_train, X_test, y_test, X_cal, y_cal, params):
         """ Model agnostic class that requries training data, test data and parameters.
 
         Args:
@@ -19,10 +20,12 @@ class SuperModel:
         self.y_train = y_train
         self.X_test = X_test
         self.y_test = y_test
+        self.X_cal = X_cal
+        self.y_cal = y_cal
         self.params = params
     
 class SuperXGBClassifier(SuperModel):
-    def __init__(self, X_train, y_train, X_test, y_test, params):
+    def __init__(self, X_train, y_train, X_test, y_test, X_cal, y_cal, params):
         """ XGBoost Regression model that requries training data, test data and parameters.
 
         Args:
@@ -32,7 +35,7 @@ class SuperXGBClassifier(SuperModel):
             y_test (Array): Test set response
             params (Dict): XGBoost model parameters
         """
-        super().__init__(X_train, y_train, X_test, y_test, params)
+        super().__init__(X_train, y_train, X_test, y_test, X_cal, y_cal, params)
         
         self.xgb_params = self._get_xgb_hyperparameters()
     
@@ -58,7 +61,7 @@ class SuperXGBClassifier(SuperModel):
     
     def fit(self):
                 
-        self.xgb_reg = xgb.XGBClassifier(n_estimators=self.params['num_rounds'],
+        self.xgb_clf = xgb.XGBClassifier(n_estimators=self.params['num_rounds'],
                                          objective = self.params['objective'],
                                          verbosity = self.params['verbosity'],
                                          early_stopping_rounds = self.params['early_stopping_rounds'],
@@ -73,18 +76,26 @@ class SuperXGBClassifier(SuperModel):
                                          monotone_constraints = self.params['monotone_constraints']
                                          )
         
-        self.xgb_model = self.xgb_reg.fit(X = self.X_train,
+        self.xgb_model = self.xgb_clf.fit(X = self.X_train,
                                           y = self.y_train,
                                           eval_set = [(self.X_train, self.y_train), (self.X_test, self.y_test)])
+    
+    def calibrate(self):
         
+        cal_probas = self.predict_proba(self.X_cal)[:, 1]
+        self.xgb_cal = BetaCalibration(parameters = "abm")
+        self.xgb_cal.fit(cal_probas.reshape(-1, 1), self.y_cal)
+
     def predict(self, X):
         
         return self.xgb_model.predict(X)
     
-    def predict_proba(self, X):
-        
-        return self.xgb_model.predict_proba(X)
+    def predict_proba(self, X, calibrate = False):
+        if calibrate:
+            return self.xgb_cal.predict(self.xgb_model.predict_proba(X)[:, 1].reshape(-1, 1))
+        else:
+            return self.xgb_model.predict_proba(X)
     
     def export_model(self, file_path):
         
-        joblib.dump(self.xgb_model, file_path)
+        joblib.dump(self, file_path)
