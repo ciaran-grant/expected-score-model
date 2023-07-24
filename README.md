@@ -57,7 +57,7 @@ TBD
 
 ![step-plot](notebooks/visualisations/expected_score_storytelling/figures/20230724_brisbane_sydney_step_plot.png)
 
-![lollipop](notebooks/visualisations/expected_score_storytelling/figures/20230724_geelong_sydney_lollipop.png
+![lollipop](notebooks/visualisations/expected_score_storytelling/figures/20230724_geelong_sydney_lollipop.png)
 
 ## Credits
 Data sourced using a private R package. Credits to dgt23.

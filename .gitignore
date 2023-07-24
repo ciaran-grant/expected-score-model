@@ -167,7 +167,7 @@ cython_debug/
 *.ttf
 
 # Images
-*.png
+notebooks/visualisations/viz/logos/*.png
 
 # mplstyle
 *.mplstyle
