@@ -103,9 +103,9 @@ Expected Score = 6*Goal% + Behind%
 
 #### Match Storytelling - Step / Lollipop Plots
 
-![step-plot](notebooks/visualisations/expected_score_storytelling/figures/20230724_brisbane_sydney_step_plot.png)
+![step-plot](notebooks/visualisations/expected_score_storytelling/figures/20230725_brisbane_sydney_step_plot.png)
 
-![lollipop](notebooks/visualisations/expected_score_storytelling/figures/20230724_geelong_sydney_lollipop.png)
+![lollipop](notebooks/visualisations/expected_score_storytelling/figures/20230725_geelong_sydney_lollipop.png)
 
 ## Credits
 Data sourced using a private R package. Credits to dgt23.
