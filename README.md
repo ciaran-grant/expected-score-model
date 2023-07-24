@@ -47,6 +47,12 @@ TBD
 
 ![shot-map](notebooks/visualisations/expected_score_shot_map/figures/20230719_jeremy_cameron_shot_map.png)
 
+#### Diamond Scatter Plots
+
+![team-scatter](notebooks/visualisations/diamond_scatter_plot/figures/20230724_team_scatter.png)
+
+![player-scatter](notebooks/visualisations/diamond_scatter_plot/figures/20230724_player_scatter.png)
+
 ## Credits
 Data sourced using a private R package. Credits to dgt23.
 
