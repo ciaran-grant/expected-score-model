@@ -53,6 +53,12 @@ TBD
 
 ![player-scatter](notebooks/visualisations/diamond_scatter_plot/figures/20230724_player_scatter.png)
 
+#### Match Storytelling - Step / Lollipop Plots
+
+![step-plot](notebooks/visualisations/expected_score_storytelling/figures/20230724_brisbane_sydney_step_plot.png)
+
+![lollipop](notebooks/visualisations/expected_score_storytelling/figures/20230724_geelong_sydney_lollipop.png
+
 ## Credits
 Data sourced using a private R package. Credits to dgt23.
 
