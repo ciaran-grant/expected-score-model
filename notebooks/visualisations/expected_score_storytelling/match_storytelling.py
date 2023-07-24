@@ -138,7 +138,7 @@ def plot_cumulative_match_story(home_shots, away_shots, duration_dict, expected=
             )
 
     # Axis Labels
-    ax.set_xlabel("Game Duration (Mins)", font="Karla")
+    ax.set_xlabel("Game Duration (Seconds)", font="Karla")
     if expected:
         ax.set_ylabel("Expected Score", font="Karla")
     else:
@@ -201,7 +201,7 @@ def plot_lollipop_match_story(home_shots, away_shots, duration_dict, expected=Tr
             )
 
     # Axis Labels
-    ax.set_xlabel("Game Duration (Mins)", font="Karla")
+    ax.set_xlabel("Game Duration (Seconds)", font="Karla")
     if expected:
         ax.set_ylabel("Expected Score", font="Karla")
     else:
