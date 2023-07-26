@@ -85,6 +85,10 @@ Open play shots will use the open models and the set shots will use the set mode
 
 Expected Score = 6*Goal% + Behind%
 
+![set-shots](notebooks/expected_score/figures/20230726_expected_score_set_shots.png)
+
+![open-shots](notebooks/expected_score/figures/20230726_expected_score_open_shots.png)
+
 ### Analysis
 
 #### Rolling Averages
