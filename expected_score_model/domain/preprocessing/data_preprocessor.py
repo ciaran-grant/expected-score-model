@@ -1,17 +1,15 @@
-# from total_points_model.domain.preprocessing.preprocessing_functions import 
 from expected_score_model.domain.contracts.modelling_data_contract import ModellingDataContract
+from expected_score_model.domain.preprocessing.preprocessing import expected_score_feature_engineering
 from sklearn.base import BaseEstimator, TransformerMixin
 
 import pandas as pd
 import numpy as np
 
-from expected_score_model.domain.contracts.mappings import Mappings
-
 class DataPreprocessor(BaseEstimator, TransformerMixin):
     """ Preprocessing class and functions for training total game score model.
     """
     
-    def __init__(self, Mappings, rolling_dict):
+    def __init__(self, set_shot, model_response):
         """ Specify mappings and rolling average columns to create.
 
         Args:
@@ -19,9 +17,11 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
             rolling_dict (Dict): Dictionary specifying columns and types of rolling average columns.
         """
         self.ModellingDataContract = ModellingDataContract
+        self.set_shot = set_shot
+        self.model_response = model_response
        
         
-    def fit(self, X):
+    def fit(self):
         """ Fits preprocessor to training data.
             Learns expected columns and mean imputations. 
 
@@ -32,24 +32,21 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
             self: Preprocessor learns expected colunms and means to impute.
         """
         
-        X_copy = X.copy()
-        
-        # Feature Engineering
-        
-        # Feature Grouping and Mappings
-        
-        # Apply self mappings
-        
-        self.modelling_cols = ModellingDataContract.modelling_feature_list + self.rolling_cols_list
-
         # Keep only modelling columns
-        self.modelling_cols = ModellingDataContract.modelling_feature_list + self.rolling_cols_list
-        X_copy = X_copy[self.modelling_cols]
-        
-        # Fitting to training data
-        self.train_set_means = X_copy.mean()
-        self.expected_dummy_cols = list(pd.get_dummies(X_copy))
-                        
+        if self.set_shot:
+            if self.model_response == "Goal":
+                self.modelling_cols = ModellingDataContract.feature_list_set_goal
+            if self.model_response == "Behind":
+                self.modelling_cols = ModellingDataContract.feature_list_set_behind
+            if self.model_response == "Miss":
+                self.modelling_cols = ModellingDataContract.feature_list_set_miss
+        else:
+            if self.model_response == "Goal":
+                self.modelling_cols = ModellingDataContract.feature_list_open_goal
+            if self.model_response == "Behind":
+                self.modelling_cols = ModellingDataContract.feature_list_open_behind
+            if self.model_response == "Miss":
+                self.modelling_cols = ModellingDataContract.feature_list_open_miss
         return self
     
     def transform(self, X):
@@ -63,21 +60,18 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
         """
         
         # Feature Engineering
+        X[['ballUp', 'centreBounce', 'kickIn', 'possGain', 'throwIn']] = pd.get_dummies(X['Initial_State'])
+        X = expected_score_feature_engineering(X)
         
-        # Feature Grouping and Mappings
+        # Shots
+        X_shots = X[X['Shot_At_Goal'] == True]
         
-        # Apply self mappings
-        
-        # Keep only modelling columns
-        self.modelling_cols = ModellingDataContract.modelling_feature_list + self.rolling_cols_list
-        X = X[[ModellingDataContract.ID_COL] + self.modelling_cols]
-        
-        # Applying transformations
-        X = X.fillna(self.train_set_means)        
-        X_dummies = pd.get_dummies(X[self.modelling_cols])
-        for col in list(self.expected_dummy_cols):
-            if col not in list(X_dummies):
-                X_dummies[col] = 0
+        # Set or Open
+        X_shots['Set_Shot'] = X_shots['Event_Type1'].apply(lambda x: ("Mark" in x) or ("Free" in x))
+        X_shots = X_shots[X_shots['Set_Shot']==self.set_shot]
 
-        return X_dummies[self.expected_dummy_cols]
+        # Modelling Features
+        X_shots = X_shots[self.modelling_cols]
+        
+        return X_shots
     
