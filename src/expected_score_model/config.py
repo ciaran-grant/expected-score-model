@@ -1,13 +1,10 @@
-raw_data_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/match_chains.csv"
-set_shots_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/set_shots.csv"
-open_shots_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/open_shots.csv"
-
-raw_data_202319_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/match_chains_202319.csv"
-set_shots_202319_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/set_shots_202319.csv"
-open_shots_202319_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/open_shots_202319.csv"
-
 # Chain Data
 chain_file_path = "/Users/ciaran/Documents/Projects/AFL/data/match_chains.csv"
+
+# Modelling Data
+set_shots_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/set_shots_modelling_data.csv"
+open_shots_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/data/open_shots_modelling_data.csv"
+
 
 # Models
 exp_goal_set_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_goal_set_v7.joblib'
