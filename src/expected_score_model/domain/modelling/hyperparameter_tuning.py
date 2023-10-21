@@ -5,7 +5,6 @@ from sklearn.metrics import mean_squared_error, log_loss
 from sklearn.model_selection import train_test_split
 
 from expected_score_model.domain.modelling.optuna_xgb_param_grid import OptunaXGBParamGrid
-from expected_score_model.domain.contracts.modelling_data_contract import ModellingDataContract
 
 class HyperparameterTuner:
     

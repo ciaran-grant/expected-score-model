@@ -1,5 +1,3 @@
-from expected_score_model.domain.contracts.modelling_data_contract import ModellingDataContract
-
 import xgboost as xgb
 import joblib
 from betacal import BetaCalibration
