@@ -11,6 +11,8 @@ from expected_score_model.config import exp_goal_set_model_file_path, exp_goal_s
 from expected_score_model.config import exp_miss_open_model_file_path, exp_miss_open_preprocessor_file_path
 from expected_score_model.config import exp_miss_set_model_file_path, exp_miss_set_preprocessor_file_path
 
+from expected_score_model.config import chain_file_path
+
 from expected_score_model.domain.preprocessing.preprocessing import expected_score_response_processing, split_shots
 
 def predict_expected_score(chain_file_path, output_file_path):

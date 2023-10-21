@@ -11,11 +11,11 @@ miss_open_shots_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositori
 
 # Models
 exp_goal_set_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_goal_set_v8.joblib'
-exp_behind_set_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_behind_set_v6.joblib'
-exp_miss_set_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_miss_set_v5.joblib'
-exp_goal_open_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_goal_open_v8.joblib'
-exp_behind_open_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_behind_open_v7.joblib'
-exp_miss_open_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_miss_open_v6.joblib'
+exp_behind_set_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_behind_set_v7.joblib'
+exp_miss_set_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_miss_set_v6.joblib'
+exp_goal_open_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_goal_open_v9.joblib'
+exp_behind_open_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_behind_open_v8.joblib'
+exp_miss_open_model_file_path = '/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models/expected_miss_open_v7.joblib'
 
 # Preprocessors
 exp_goal_set_preprocessor_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/preprocessors/set_goal_preproc.joblib"
