@@ -96,25 +96,13 @@ def predict_open_shots():
 
 
 if __name__ == "__main__":
-    preproc_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/preprocessors"
     models_file_path = "/Users/ciaran/Documents/Projects/AFL/git-repositories/expected-score-model/model_outputs/models"
 
-    goal_set_preproc = joblib.load(preproc_file_path + "/set_goal_preproc.joblib")
     goal_set_model = joblib.load(models_file_path + "/expected_goal_set.joblib")
-
-    goal_open_preproc = joblib.load(preproc_file_path + "/open_goal_preproc.joblib")
     goal_open_model = joblib.load(models_file_path + "/expected_goal_open.joblib")
-
-    behind_set_preproc = joblib.load(preproc_file_path + "/set_behind_preproc.joblib")
     behind_set_model = joblib.load(models_file_path + "/expected_behind_set.joblib")
-
-    behind_open_preproc = joblib.load(preproc_file_path + "/open_behind_preproc.joblib")
     behind_open_model = joblib.load(models_file_path + "/expected_behind_open.joblib")
-
-    miss_set_preproc = joblib.load(preproc_file_path + "/set_miss_preproc.joblib")
     miss_set_model = joblib.load(models_file_path + "/expected_miss_set.joblib")
-
-    miss_open_preproc = joblib.load(preproc_file_path + "/open_miss_preproc.joblib")
     miss_open_model = joblib.load(models_file_path + "/expected_miss_open.joblib")
 
     app.run(host="0.0.0.0", port=8000, debug=True)
