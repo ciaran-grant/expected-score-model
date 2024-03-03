@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  matchoutcome:
+    image: ciarangrant/expectedscore:v20240303
+    volumes:
+      - /opt/AFL_Data:/AFL_Data
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.expectedscore.loadbalancer.server.port=8000
+        
+        - traefik.http.routers.expectedscore.entrypoints=websecure
+        - traefik.http.routers.expectedscore.rule=Host(`ciarandgrant.com`)
+        - traefik.http.routers.expectedscore.tls=true
+        - traefik.http.routers.expectedscore.service=expectedscore
+        - traefik.http.routers.expectedscore.middlewares=authelia@docker
+      restart_policy:
+        condition: on-failure
+    networks:
+      - Traefik_overlay
+
+networks:
+  Traefik_overlay:
+    external: true
