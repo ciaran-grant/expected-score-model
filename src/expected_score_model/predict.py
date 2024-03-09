@@ -1,20 +1,26 @@
 import pandas as pd
+import numpy as np
 import joblib
 from AFLPy.AFLData_Client import load_data
 from expected_score_model.domain.preprocessing.preprocessing import expected_score_response_processing, split_shots
 
-def predict_xscore():
+def predict_xscore(ID = None):
 
     # Load chain data
-    chain_data = load_data(Dataset_Name='AFL_API_Chains')
+    chain_data = load_data(Dataset_Name='AFL_API_Match_Chains', ID = ID)
 
     # Preprocess
+    chain_data['Quarter_Duration'] = chain_data['Period_Duration']
+    chain_data['Quarter_Duration_Chain_Start'] = chain_data['Period_Duration_Chain_Start']
+    chain_data['Shot_At_Goal'] = np.where(chain_data['Shot_At_Goal'] == "TRUE", True, False)
+
     chain_data = expected_score_response_processing(chain_data)
     df_set_shots, df_open_shots = split_shots(chain_data)
 
     goal_set_preproc = joblib.load("model_outputs/preprocessors/set_goal_preproc.joblib")
     behind_set_preproc = joblib.load("model_outputs/preprocessors/set_behind_preproc.joblib")
     miss_set_preproc = joblib.load("model_outputs/preprocessors/set_miss_preproc.joblib")
+    
     goal_open_preproc = joblib.load("model_outputs/preprocessors/open_goal_preproc.joblib")
     behind_open_preproc = joblib.load('model_outputs/preprocessors/open_behind_preproc.joblib')
     miss_open_preproc = joblib.load("model_outputs/preprocessors/open_miss_preproc.joblib")
@@ -31,8 +37,8 @@ def predict_xscore():
     expected_behind_set_model = joblib.load("model_outputs/models/expected_behind_set.joblib")
     expected_miss_set_model = joblib.load("model_outputs/models/expected_miss_set.joblib")
 
-    expected_goal_open_model = joblib.load("model_outputs/models/expected_goal_miss.joblib")
-    expected_behind_open_model = joblib.load("model_outputs/models/expected_behind_miss.joblib")
+    expected_goal_open_model = joblib.load("model_outputs/models/expected_goal_open.joblib")
+    expected_behind_open_model = joblib.load("model_outputs/models/expected_behind_open.joblib")
     expected_miss_open_model = joblib.load("model_outputs/models/expected_miss_open.joblib")
 
     # Score models

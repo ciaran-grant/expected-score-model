@@ -1,14 +1,14 @@
 version: "3"
 
 services:
-  matchoutcome:
-    image: ciarangrant/expectedscore:v20240303
+  expectedscore:
+    image: ciarangrant/expectedscore:v20240310
     volumes:
       - /opt/AFL_Data:/AFL_Data
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.http.services.expectedscore.loadbalancer.server.port=8000
+        - traefik.http.services.expectedscore.loadbalancer.server.port=8001
         
         - traefik.http.routers.expectedscore.entrypoints=websecure
         - traefik.http.routers.expectedscore.rule=Host(`ciarandgrant.com`)
