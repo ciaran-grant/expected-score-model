@@ -2,7 +2,7 @@ version: "3"
 
 services:
   expectedscore:
-    image: ciarangrant/expectedscore:v20240310
+    image: ciarangrant/expectedscore:v20240312
     volumes:
       - /opt/AFL_Data:/AFL_Data
     deploy:
@@ -11,7 +11,7 @@ services:
         - traefik.http.services.expectedscore.loadbalancer.server.port=8001
         
         - traefik.http.routers.expectedscore.entrypoints=websecure
-        - traefik.http.routers.expectedscore.rule=Host(`ciarandgrant.com`)
+        - traefik.http.routers.expectedscore.rule=Host(`ciarandgrant.com`) && PathPrefix(`/model/expectedscore`)
         - traefik.http.routers.expectedscore.tls=true
         - traefik.http.routers.expectedscore.service=expectedscore
         - traefik.http.routers.expectedscore.middlewares=authelia@docker
