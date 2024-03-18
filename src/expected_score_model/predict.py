@@ -1,21 +1,17 @@
 import pandas as pd
 import numpy as np
 import joblib
-from AFLPy.AFLData_Client import load_data
 from expected_score_model.domain.preprocessing.preprocessing import expected_score_response_processing, split_shots
 
-def predict_xscore(ID = None):
-
-    # Load chain data
-    chain_data = load_data(Dataset_Name='AFL_API_Match_Chains', ID = ID)
+def predict_xscore(chains):
 
     # Preprocess
-    chain_data['Quarter_Duration'] = chain_data['Period_Duration']
-    chain_data['Quarter_Duration_Chain_Start'] = chain_data['Period_Duration_Chain_Start']
-    chain_data['Shot_At_Goal'] = np.where(chain_data['Shot_At_Goal'] == "TRUE", True, False)
+    chains['Quarter_Duration'] = chains['Period_Duration']
+    chains['Quarter_Duration_Chain_Start'] = chains['Period_Duration_Chain_Start']
+    chains['Shot_At_Goal'] = np.where(chains['Shot_At_Goal'] == "TRUE", True, False)
 
-    chain_data = expected_score_response_processing(chain_data)
-    df_set_shots, df_open_shots = split_shots(chain_data)
+    chains = expected_score_response_processing(chains)
+    df_set_shots, df_open_shots = split_shots(chains)
 
     goal_set_preproc = joblib.load("model_outputs/preprocessors/set_goal_preproc.joblib")
     behind_set_preproc = joblib.load("model_outputs/preprocessors/set_behind_preproc.joblib")
@@ -25,12 +21,12 @@ def predict_xscore(ID = None):
     behind_open_preproc = joblib.load('model_outputs/preprocessors/open_behind_preproc.joblib')
     miss_open_preproc = joblib.load("model_outputs/preprocessors/open_miss_preproc.joblib")
 
-    set_goal_features = goal_set_preproc.transform(chain_data)
-    set_behind_features = behind_set_preproc.transform(chain_data)
-    set_miss_features = miss_set_preproc.transform(chain_data)
-    open_goal_features = goal_open_preproc.transform(chain_data)
-    open_behind_features = behind_open_preproc.transform(chain_data)
-    open_miss_features = miss_open_preproc.transform(chain_data)
+    set_goal_features = goal_set_preproc.transform(chains)
+    set_behind_features = behind_set_preproc.transform(chains)
+    set_miss_features = miss_set_preproc.transform(chains)
+    open_goal_features = goal_open_preproc.transform(chains)
+    open_behind_features = behind_open_preproc.transform(chains)
+    open_miss_features = miss_open_preproc.transform(chains)
 
     # Load models
     expected_goal_set_model = joblib.load("model_outputs/models/expected_goal_set.joblib")

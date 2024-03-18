@@ -1,5 +1,5 @@
 from expected_score_model.predict import predict_xscore
-from AFLPy.AFLData_Client import upload_data
+from AFLPy.AFLData_Client import load_data, upload_data
 
 from flask import Flask, request
 
@@ -7,10 +7,13 @@ app = Flask(__name__)
 
 @app.route("/model/expectedscore/predict", methods=["GET", "POST"])
 def predict(ID = None):
-
-    shots = predict_xscore(ID = request.json['ID'])
     
-    upload_data(Dataset_Name="CG_Expected_Score", Dataset=shots, overwrite=True, update_if_identical=True)
+    # Load chain data
+    chains = load_data(Dataset_Name='AFL_API_Match_Chains', ID = request.json['ID'])
+
+    shots = predict_xscore(chains)
+    
+    # upload_data(Dataset_Name="CG_Expected_Score", Dataset=shots, overwrite=True, update_if_identical=True)
     
     return shots.to_json(orient='records')
 
