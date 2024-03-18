@@ -13,7 +13,7 @@ def predict(ID = None):
 
     shots = predict_xscore(chains)
     
-    # upload_data(Dataset_Name="CG_Expected_Score", Dataset=shots, overwrite=True, update_if_identical=True)
+    upload_data(Dataset_Name="CG_Expected_Score", Dataset=shots, overwrite=True, update_if_identical=True)
     
     return shots.to_json(orient='records')
 
