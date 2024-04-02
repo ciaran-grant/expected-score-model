@@ -12,6 +12,7 @@ def predict(ID = None):
     chains = load_data(Dataset_Name='AFL_API_Match_Chains', ID = request.json['ID'])
 
     shots = predict_xscore(chains)
+    shots = shots.drop_duplicates(subset = ['Chain_Number', 'Period_Duration_Chain_Start'])
     
     upload_data(Dataset_Name="CG_Expected_Score", Dataset=shots, overwrite=True, update_if_identical=True)
     
