@@ -2,59 +2,59 @@ import matplotlib.pyplot as plt
 
 team_colours = {
     'Adelaide':{
-        'positive':'#002b5c',
-        'negative':'#bb9e41'},
+        'primary':'#002b5c',
+        'secondary':'#bb9e41'},
     'Brisbane':{
-        'positive':'#7C003E',
-        'negative':'#0054A4'},
+        'primary':'#7C003E',
+        'secondary':'#0054A4'},
     'Carlton':{
-        'positive':'#1d5a8b',
-        'negative':'#bbbfc0'},
+        'primary':'#1d5a8b',
+        'secondary':'#bbbfc0'},
     'Collingwood':{
-        'positive':'white',
-        'negative':'#494949'},
+        'primary':'white',
+        'secondary':'#494949'},
     'Essendon':{
-        'positive':'#CC2031',
-        'negative':'#939598'},
+        'primary':'#CC2031',
+        'secondary':'#939598'},
     'Fremantle':{
-        'positive':'#664985',
-        'negative':'#a2acb4'},
+        'primary':'#664985',
+        'secondary':'#a2acb4'},
     'Geelong':{
-        'positive':'#1c3c63',
-        'negative':'white'},
+        'primary':'#1c3c63',
+        'secondary':'white'},
     'Gold Coast':{
-        'positive':'#B90A34',
-        'negative':'#d3bb51'},
+        'primary':'#B90A34',
+        'secondary':'#d3bb51'},
     'Greater Western Sydney':{
-        'positive':'#f47a1a',
-        'negative':'#944712'},
+        'primary':'#f47a1a',
+        'secondary':'#944712'},
     'Hawthorn':{
-        'positive':'#fbbf15',
-        'negative':'#4d2004'},
+        'primary':'#fbbf15',
+        'secondary':'#4d2004'},
     'Melbourne':{
-        'positive':'#002076',
-        'negative':'#cc2031'},
+        'primary':'#002076',
+        'secondary':'#cc2031'},
     'North Melbourne':{
-        'positive':'#013b9f',
-        'negative':'white'},
+        'primary':'#013b9f',
+        'secondary':'white'},
     'Port Adelaide':{
-        'positive':'#008aab',
-        'negative':'#3b3b3b'},    
+        'primary':'#008aab',
+        'secondary':'#3b3b3b'},    
     'Richmond':{
-        'positive':'#fed102',
-        'negative':'#4d4d4d'},
+        'primary':'#fed102',
+        'secondary':'#4d4d4d'},
     'St Kilda':{
-        'positive':'#ed0f05',
-        'negative':'#4d4d4d'},
+        'primary':'#ed0f05',
+        'secondary':'#4d4d4d'},
     'Sydney':{
-        'positive':'#ed171f',
-        'negative':'white'},
+        'primary':'#ed171f',
+        'secondary':'white'},
     'West Coast':{
-        'positive':'#062ee2',
-        'negative':'#ffd700'},
+        'primary':'#062ee2',
+        'secondary':'#ffd700'},
     'Western Bulldogs':{
-        'positive':'#014896',
-        'negative':'#c70136'}
+        'primary':'#014896',
+        'secondary':'#c70136'}
 }
 
 

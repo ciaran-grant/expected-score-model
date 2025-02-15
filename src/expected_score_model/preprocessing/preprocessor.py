@@ -21,15 +21,63 @@ class ExpectedScorePreprocessor:
     fit_transform(X, y)
         Fits the preprocessor to the data and then transforms it.
     """
-
+    
+    def __init__(self):
+            
+        self.description_mapping = {
+            'Kick': 'Kick',
+            'Handball': 'Handball',
+            'Handball Receive': 'Handball',
+            'Uncontested Mark': 'Mark',
+            'Loose Ball Get': 'Ball Get',
+            'Kick Into 50': 'Kick',
+            'Kick Inside 50 Result': 'Kick',
+            'Spoil': 'Spoil',
+            'Hard Ball Get': 'Ball Get',
+            'Loose Ball Get Crumb': 'Ball Get',
+            'Gather': 'Gather',
+            'Out of Bounds': 'Out of Bounds',
+            'Free For': 'Free',
+            'Contested Mark': 'Mark',
+            'Ball Up Call': 'Ball Up',
+            'Contest Target': 'Contest',
+            'Centre Bounce': 'Centre Bounce',
+            'Goal': 'Goal',
+            'Gather From Hitout': 'Gather',
+            'Kickin playon': 'Kick',
+            'Behind': 'Behind',
+            'Contested Knock On': 'Knock On',
+            'Mark On Lead': 'Mark',
+            'Ground Kick': 'Kick',
+            'Hard Ball Get Crumb': 'Ball Get',
+            'Gather from Opposition': 'Gather',
+            'Bounce':'Bounce',
+            'Shot At Goal': 'Shot At Goal',
+            'Mark Fumbled': 'Mark Dropped',
+            'Mark Dropped': 'Mark Dropped',
+            'OOF Kick In': 'Kick',
+            'Out On Full After Kick': 'Kick',
+            'Ruck Hard Ball Get': 'Ball Get',
+            'No Pressure Error': 'Clanger',
+            'Free For: In Possession': 'Free',
+            'Free Advantage': 'Free',
+            'Kickin short': 'Kick',
+            'Knock On': 'Knock On',
+            'Free For: Off The Ball': 'Free'
+        }
+    
     def feature_engineering(self, X):
         X_copy = X.copy(deep=True)
         
         X_copy['initial_state'] = X_copy['Initial_State']
         
-        for col in ['Description', 'x', 'y', 'Period_Duration']:
+        X_copy['Description_grouped'] = X_copy['Description'].map(self.description_mapping)
+        X_copy['Description_grouped'] = X_copy['Description_grouped'].fillna('Other')
+        
+        for col in ['Description_grouped', 'x', 'y', 'Period_Duration']:
             for i in range(4):
                 X_copy[f'{col.lower()}_{i}'] = X_copy[col].shift(i) if i > 0 else X_copy[col]
+        X_copy['set_shot'] = X_copy['description_grouped_1'].apply(lambda x: 1 if x is not None and isinstance(x, str) and ("Mark" in x or "Free" in x) else 0)
 
         X_copy['time_since_last_action'] = X_copy['period_duration_0'] - X_copy['period_duration_1']
         X_copy['distance_since_last_action'] = ((X_copy['x_1'] - X_copy['x_0'])**2 + (X_copy['y_1'] - X_copy['y_0'])**2)**0.5
@@ -50,11 +98,7 @@ class ExpectedScorePreprocessor:
         
         X_copy['distance_squared'] = X_copy['distance']**2
         X_copy['distance_log'] = np.log(X_copy['distance'])
-        
-        X_copy['ground_kick'] = X_copy['Description'].astype(str).apply(lambda x: 1 if 'Ground Kick' in x else 0)
-        
-        X_copy['set_shot'] = X_copy['description_1'].apply(lambda x: 1 if x is not None and isinstance(x, str) and ("Mark" in x or "Free" in x) else 0)
-                
+                                
         return X_copy
     
     def filter_data(self, X, y=None):
