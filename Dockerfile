@@ -8,7 +8,8 @@ RUN apt-get install -y git
 
 # Copy files in
 WORKDIR /app
-COPY . /app
+COPY app.py /app/app.py
+COPY requirements.txt /app/requirements.txt
 
 # Install package
 RUN pip install git+https://github.com/ciaran-grant/expected-score-model
