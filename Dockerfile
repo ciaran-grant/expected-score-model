@@ -9,6 +9,7 @@ RUN apt-get install -y git
 # Copy files in
 WORKDIR /app
 COPY app.py /app/app.py
+COPY .env /app/.env
 COPY requirements.txt /app/requirements.txt
 
 # Install package
