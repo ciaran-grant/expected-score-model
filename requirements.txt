@@ -3,8 +3,11 @@ numpy==1.23.5
 joblib
 matplotlib
 seaborn
-xgboost==1.7.3
+xgboost
+catboost
 optuna
 betacal
 shap
 pandera
+highlight_text
+flask
