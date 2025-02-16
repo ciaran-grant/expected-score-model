@@ -6,9 +6,6 @@ import matplotlib.gridspec as gridspec
 import itertools
 
 from expected_score_model.visualisation.afl_colours import team_colours
-from expected_score_model.fonts.fonts import font_path, load_fonts
-
-load_fonts(font_path)
 
 def create_team_rolling(shots, team, window=10, metric='xscore'):
     
