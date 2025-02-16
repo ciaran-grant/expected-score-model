@@ -1,8 +1,6 @@
 import os
 import matplotlib.font_manager as fm
 
-font_path = os.path.dirname(os.path.abspath(__file__))
-
 def load_fonts(font_path):
     
     for x in os.listdir(font_path):

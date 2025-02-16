@@ -1,6 +1,7 @@
 from expected_score_model.predict import predict_xscore_from_chains
 from expected_score_model.visualisation.plot_team_rolling_averages import create_team_rolling, plot_team_rolling_ax, plot_all_team_rolling_figure
 from AFLPy.AFLData_Client import load_data, upload_data
+from expected_score_model.fonts.fonts import load_fonts
 
 import matplotlib
 matplotlib.use('Agg')  # Use non-GUI backend before importing pyplot
@@ -33,18 +34,28 @@ def plot_team_rolling_xscore():
 
     team = data['team']
     window = data.get('window', 10)  # Default to 10 if not provided
+    metric = data.get('metric', 'xscore')
+    annotate = data.get('annotate', True)
     years = data.get('years', None)
+    
+    style = data.get('style', 'rolling_dark')
 
     # Load shots with expected score data
     shots = load_data(Dataset_Name="CG_Expected_Score")
     shots['Year'] = shots['Match_ID'].apply(lambda x: int(x.split("_")[1]))
     shots['Round'] = shots['Match_ID'].apply(lambda x: x.split("_")[2])
 
-    team_rolling = create_team_rolling(shots, team, window, metric='xscore')
+    team_rolling = create_team_rolling(shots, team, window, metric=metric)
 
     # Generate plot
+    style_path = os.path.join(os.path.dirname(__file__), 'src', 'expected_score_model', 'visualisation', 'styles', f'{style}.mplstyle')
+    plt.style.use(style_path)
+
+    font_path = os.path.join(os.path.dirname(__file__), 'src', 'expected_score_model', 'fonts')
+    load_fonts(font_path)
+
     fig, ax = plt.subplots()
-    ax = plot_team_rolling_ax(ax=ax, team=team, team_rolling=team_rolling, annotate=True, years=years)
+    ax = plot_team_rolling_ax(ax=ax, team=team, team_rolling=team_rolling, annotate=annotate, years=years)
 
     # Convert plot to image
     img = io.BytesIO()
@@ -64,7 +75,7 @@ def plot_all_team_rolling_xscore():
     add_title = data.get('add_title', True)
     years = data.get('years', None)
     
-    style = data.get('style', 'dark')
+    style = data.get('style', 'rolling_dark')
 
     # Load shots with xscore
     shots = load_data(Dataset_Name="CG_Expected_Score")
@@ -73,6 +84,9 @@ def plot_all_team_rolling_xscore():
 
     style_path = os.path.join(os.path.dirname(__file__), 'src', 'expected_score_model', 'visualisation', 'styles', f'{style}.mplstyle')
     plt.style.use(style_path)
+    
+    font_path = os.path.join(os.path.dirname(__file__), 'src', 'expected_score_model', 'fonts')
+    load_fonts(font_path)
 
     fig, ax = plot_all_team_rolling_figure(
         shots, 
