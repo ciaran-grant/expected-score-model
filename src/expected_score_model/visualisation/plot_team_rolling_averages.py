@@ -6,7 +6,7 @@ import matplotlib.gridspec as gridspec
 import itertools
 
 from expected_score_model.visualisation.afl_colours import team_colours
-from expected_score_model.visualisation.fonts import font_path, load_fonts
+from expected_score_model.fonts.fonts import font_path, load_fonts
 
 load_fonts(font_path)
 
@@ -71,7 +71,6 @@ def annotate_team_rolling_ax(ax, team, team_rolling, colour_for, colour_against,
         x=0, y=140,
         s=f'<{team}>\n<xscore for: {for_number:.1f}>  <xscore against: {against_number:.1f}>',
         highlight_textprops=[
-            # {'color':'white', 'weight':'bold', 'font':'Karla'},
             {'weight':'bold', 'font':'Karla'},
             {'size':'10', 'bbox':{'edgecolor':colour_for, 'facecolor':colour_for, 'pad':1}, 'color':text_colour_for},
             {'size':'10', 'bbox':{'edgecolor':colour_against, 'facecolor':colour_against, 'pad':1}, 'color':text_colour_against},
