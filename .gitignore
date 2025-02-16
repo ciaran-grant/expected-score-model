@@ -162,12 +162,6 @@ cython_debug/
 # Data
 *.csv
 *.joblib
+*.RDS
 
-# Fonts
-*.ttf
 
-# Images
-notebooks/visualisations/viz/logos/*.png
-
-# mplstyle
-*.mplstyle
