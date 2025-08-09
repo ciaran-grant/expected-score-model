@@ -2,6 +2,7 @@ from expected_score_model.predict import predict_xscore_from_chains
 from expected_score_model.visualisation.plot_team_rolling_averages import create_team_rolling, plot_team_rolling_ax, plot_all_team_rolling_figure
 from AFLPy.AFLData_Client import load_data, upload_data
 from expected_score_model.fonts.fonts import load_fonts
+from AFLPy.ntfy import push_notification
 
 import matplotlib
 matplotlib.use('Agg')  # Use non-GUI backend before importing pyplot
@@ -23,6 +24,8 @@ def predict(ID=None):
     
     upload_data(Dataset_Name="CG_Expected_Score", Dataset=shots, overwrite=True, update_if_identical=True)
     
+    push_notification("Expected Score Data Processed for:", ", ".join(list(shots['Match_ID'].unique())))
+
     return shots.to_json(orient='records')
 
 @app.route("/model/expectedscore/plot_team_rolling_xscore", methods=["GET", "POST"])
