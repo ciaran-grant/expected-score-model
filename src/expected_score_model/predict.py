@@ -6,10 +6,10 @@ def predict_xscore_from_chains(chains):
     
     chains = chains.reset_index(drop=True)
 
-    xscore_preproc = joblib.load("model_outputs/preprocessors/xscore_preprocessor.joblib")
+    xscore_preproc = joblib.load("model_outputs/preprocessors/xscore_preprocessor_25.joblib")
     shots_features = xscore_preproc.transform(chains)
 
-    xscore_model = joblib.load("model_outputs/models/catboost_xscore_model.joblib")   
+    xscore_model = joblib.load("model_outputs/models/catboost_xscore_model_25.joblib")   
     model_features = xscore_model.cb_clf.feature_names_
     
     shots = chains.loc[shots_features.index]
